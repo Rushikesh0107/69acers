@@ -43,7 +43,7 @@ export const login = (username, password, navigate)  => {
             
             toast.success("Login Successfull");
             navigate("/")
-            //window.location.reload();
+            window.location.reload();
         } catch (error) {
             toast.error(error.response?.data?.message)
             console.log("LOGIN_API ERROR", error);

@@ -20,8 +20,8 @@ const NavBar = () => {
 
     const NavLinks = [
         {
-            title: "Store",
-            path: "/store"
+            title: "Marketplace",
+            path: "/marketplace"
         },
         {
             title: "About",
@@ -45,7 +45,7 @@ const NavBar = () => {
   return (
     <div>
         <nav
-        className='z-[10] flex h-16 w-full items-center justify-center bg-gradient-to-r from-gray-100 to-blue-700 py-10 text-white translate-y-0 transition-all'
+        className='z-[10] flex h-16 w-full items-center justify-center py-10 text-white translate-y-0 transition-all'
         >
             <div
             className='flex w-11/12 max-w-maxContent items-center justify-between'
@@ -59,7 +59,7 @@ const NavBar = () => {
                 </Link>
 
                 <ul
-                className='hidden sm:flex gap-x-6 text-xl font-bold text-white tracking-widest'
+                className='hidden sm:flex gap-x-6 text-xl font-bold text-black tracking-widest'
                 >
                     {
                         NavLinks.map((link, index) => (

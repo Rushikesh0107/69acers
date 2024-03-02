@@ -3,11 +3,9 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StyledBadge from '@mui/material/Badge';
 import {useSelector} from 'react-redux';
 import NavBar from './NavBar';
-import Logo from "../../assets/Logo/Logo.png"
 
 const settings = ['Profile', 'Logout', 'Order'];
 const pages = ['Home', 'Store', 'About', 'Contact'];
@@ -70,7 +68,7 @@ const Header = () => {
     {isMobile ? (
       <>
       <div 
-    className={`w-full bg-gradient-to-r from-gray-100 to-blue-700 h-16 flex items-center px-6 justify-between`}>
+    className={`w-full h-16 flex items-center px-6 justify-between`}>
 
 
       <div>
@@ -168,7 +166,7 @@ const Header = () => {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar 
                   alt="Remy Sharp" 
-                  src={user?.avatar || 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'}
+                  src={user?.avatar}
                   sx={{ width: 40, height: 40 }} 
                   />
                 </IconButton>

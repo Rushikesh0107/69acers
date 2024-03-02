@@ -9,7 +9,7 @@ const Logout = () => {
     const token = localStorage.getItem('accessToken')
   return (
     <div
-    className='bg-gradient-to-r from-gray-100 to-green-900 flex items-center justify-center'
+    className='bg-gradient-to-r from-gray-100 to-blue-700 flex items-center justify-center'
     style={{height: 'calc(100vh - 64px)'}}
     >
         <button

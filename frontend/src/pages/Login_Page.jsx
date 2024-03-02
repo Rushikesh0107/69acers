@@ -23,7 +23,7 @@ const Login_Page = () => {
 
   return (
     <div
-    className='flex h-screen justify-between'
+    className='flex h-screen justify-center'
     >
       <div
       className=' md:w-full'
@@ -35,7 +35,7 @@ const Login_Page = () => {
         </div>
       </div>
 
-      {!isMobile && <div className='w-full '>
+      {!isMobile && <div className='w-full'>
         <img 
         src={realestate} 
         alt=""

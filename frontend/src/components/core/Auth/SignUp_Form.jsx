@@ -3,24 +3,26 @@ import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-//import { register } from '../../../services/Operations/authAPI';
-
-//import { setsignupData } from '../../../Slices/authSlice';
+import { register } from '../../../services/operations/authAPI';
+import { setUser } from '../../../Slices/authSlice';
+import {useEffect} from 'react'
 
 const SignUpForm = () => {
 
     const [file, setFile] = useState(null);
+    const [walletAddress, setWalletAddress] = useState("");
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
         phone: '',
         username: '',
         password: '',
+        metaMaskAddress: ''
     })
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {fullname, email, phone, username, password} = formData;
+    let {fullname, email, phone, username, password, metaMaskAddress} = formData;
 
     const handleOnChange = (e)  => {
         setFormData((prevData) => ({
@@ -45,13 +47,74 @@ const SignUpForm = () => {
             size: file ? file.size : 0,
           };
 
-        const { fullname, email, phone, username, password } = formData;
+        dispatch(register(username, password, email, fullname, phone, file, metaMaskAddress, navigate));
 
-        dispatch(register(username, password, email, fullname, phone, file, navigate));
-
-        dispatch(setsignupData({ fullname, email, phone, username, password, avatarData}));
-        //console.log(formData);
+        dispatch(setUser({ fullname, email, phone, username, password, avatarData, metaMaskAddress}));
+        console.log(formData);
       }
+
+      useEffect(() => {
+        getCurrentWalletConnected();
+        addWalletListener();
+      }, [walletAddress]);
+    
+    const connectWallet = async () => {
+    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+        try {
+        /* MetaMask is installed */
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+        setWalletAddress(accounts[0]);
+        const address = accounts[0];
+        //console.log(accounts[0]);
+        setFormData((prevData) => ({
+          ...prevData,
+          metaMaskAddress: address, // Update metaMaskAddress in the formData state
+      }));
+      console.log(address);
+        } catch (err) {
+        console.error(err.message);
+        }
+    } else {
+        /* MetaMask is not installed */
+        console.log("Please install MetaMask");
+    }
+    };
+    
+    const getCurrentWalletConnected = async () => {
+        if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+        try {
+            const accounts = await window.ethereum.request({
+            method: "eth_accounts",
+            });
+            if (accounts.length > 0) {
+            setWalletAddress(accounts[0]);
+            console.log(accounts[0]);
+            } else {
+            console.log("Connect to MetaMask using the Connect button");
+            }
+        } catch (err) {
+            console.error(err.message);
+        }
+    } else {
+        /* MetaMask is not installed */
+        console.log("Please install MetaMask");
+    }
+    };
+    
+    const addWalletListener = async () => {
+        if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+            window.ethereum.on("accountsChanged", (accounts) => {
+            setWalletAddress(accounts[0]);
+            console.log(accounts[0]);
+            });
+        } else {
+            /* MetaMask is not installed */
+            setWalletAddress("");
+            console.log("Please install MetaMask");
+        }
+    };
     
   return (
     <>
@@ -138,6 +201,17 @@ const SignUpForm = () => {
                 placeholder='Password'
                 className='p-3 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full'
                 />
+
+                <button
+                  className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded w-48 mx-auto"
+                  onClick={connectWallet}
+                >
+                    <span className="is-link has-text-weight-bold">
+                    {walletAddress && walletAddress.length > 0
+                        ? `Connected`
+                        : "Connect Wallet"}
+                    </span>
+                </button>
 
                 <input 
                 type="submit" 

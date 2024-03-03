@@ -15,6 +15,7 @@ const DetailsAboutProperty = () => {
     const [property, setProperty] = useState({})
     const [modal, setModal] = useState(false)
     const [fetchedJson,setFetchedJson] = useState([])
+    const [initForFunction, setinitForFunction] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,9 +47,9 @@ const DetailsAboutProperty = () => {
 
         console.log(contractAddress, fetchedJson);
   
-        const initForFunction = await axios.post(`${LOCAL}/InitApi/${contractAddress}/${privateApi}`, fetchedJson)
+        const data = await axios.post(`${LOCAL}/InitApi/${contractAddress}/${privateApi}`, fetchedJson)
 
-        console.log(initForFunction.data);
+        setinitForFunction(data.data);
   
         setModal(false);
       }

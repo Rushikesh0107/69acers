@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 
 const TRUE = import.meta.env.VITE_APP_TRUE_BACKEND
+const LOCAL = import.meta.env.VITE_APP_LOCAL_BACKEND
 // console.log(TRUE);
 
 const DetailsAboutProperty = () => {
@@ -12,9 +13,8 @@ const DetailsAboutProperty = () => {
     const {id} = useParams()
     console.log("Id is : ",id)
     const [property, setProperty] = useState({})
-    const [history, setHistory] = useState({})
     const [modal, setModal] = useState(false)
-    const [fetchedJson, setFetchedJson] = useState({})
+    const [fetchedJson,setFetchedJson] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,17 +29,24 @@ const DetailsAboutProperty = () => {
      }, [])
 
      const handleClick = async () => {
-         const fetchedJson_ = await axios.get(`${TRUE}/getjson`).catch((err) => console.log(err));
-         setFetchedJson(fetchedJson_.data);
-         console.log(fetchedJson_.data);
+         let fetchedJson_ = await axios.get(`${TRUE}/getjson`).catch((err) => console.log(err));
+         const data = await fetchedJson_.data;
+         setFetchedJson(data);
+         console.log(data);
          setModal(true)
 
      }
 
      const handlePrivateApi = async (e) => {
+       
+        e.preventDefault();
         const privateApi = document.getElementById('privateApi').value;
+
+        const contractAddress = property.contractAddress;
+
+        console.log(contractAddress, fetchedJson);
   
-        const initForFunction = await axios.post(`${LOCAL}/InitApi/${contractAddress}/${privateApi}`, fetchedJson.data)
+        const initForFunction = await axios.post(`${LOCAL}/InitApi/${contractAddress}/${privateApi}`, fetchedJson)
 
         console.log(initForFunction.data);
   
@@ -96,7 +103,7 @@ const DetailsAboutProperty = () => {
             </div>
             <div className="flex justify-center mt-2">
                 <div
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className=" text-black font-bold py-2 px-4 rounded"
                 >
                     Read Details : {property.description}
                 </div>

@@ -75,7 +75,9 @@ const Profile = () => {
     }
 
     const handlePrivateApi = async (e) => {
+      e.preventDefault();
       const privateApi = document.getElementById('privateApi').value;
+      console.log("hello");
 
       const initForFunction = await axios.post(`${LOCAL}/InitApi/${contractAddress}/${privateApi}`, fetchedJson.data)
       

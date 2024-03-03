@@ -55,7 +55,7 @@ const NavBar = () => {
                 >
                     <span
                     className='text-3xl font-bold tracking-widest text-black'
-                    >69acres</span>
+                    >Property Pulse</span>
                 </Link>
 
                 <ul

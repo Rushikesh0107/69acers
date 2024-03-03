@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import ContactUs from './pages/ContactUs'
 import About from './pages/About'
 import Marketplace from './pages/Marketplace'
+import DetailsAboutProperty from './pages/DetailsAboutProperty'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<ContactUs />} />
           <Route path='/marketplace' element={<Marketplace/>} />
+          <Route path='/property/:id' element={<DetailsAboutProperty/>} />
         </Route>
       </Routes>
     </>

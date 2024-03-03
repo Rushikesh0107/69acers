@@ -15,7 +15,7 @@ function Footer() {
                                     sx={{width: '2.5rem', height: '2.5rem'}}
                                     />
                                     <span className="ml-2 text-2xl font-bold tracking-wide text-gray-800 ">
-                                        69acres
+                                        Property Pulse
                                     </span>
                                 </Link>
                             </div>

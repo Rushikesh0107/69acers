@@ -3,6 +3,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 
 import UserRouter from "./routes/User.route.js"
+import PropertyRouter from "./routes/Property.routes.js"
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(cors(
 ))
 
 app.use("/api/v1/user", UserRouter);
+
+app.use("/api/v1/property", PropertyRouter);
 
 export {app};
 

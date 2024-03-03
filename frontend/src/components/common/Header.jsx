@@ -146,7 +146,7 @@ const Header = () => {
                 <span
                 className='text-2xl font-bold text-white hover:text-gray-300 transition-all duration-300'
                 >
-                    69acres
+                    Property Pulse
                 </span>
         </Link>
       </div>

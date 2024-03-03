@@ -75,15 +75,19 @@ export const getAllProperties = asyncHandler( async (req, res) => {
 export const getProppertyById = asyncHandler( async(req, res) => {
     const id = req.params.id;
 
+    // console.log(id, "id");
+
     if(!id){
         throw new ApiErrors(404, "Property not found")
     }
 
-    const property = Property.findById(id)
+    const property = await Property.findById(id);
 
     if(!property){
         throw new ApiErrors(404, "Property Not Found")
     }
+
+    console.log(property, "property");
 
     return res
     .status(200)

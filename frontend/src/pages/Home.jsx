@@ -1,6 +1,7 @@
 import React from 'react'
 import Banner from "../assets/Banner.jpeg"
 import Cities from '../components/core/Home/Cities'
+import Marketplace from './Marketplace'
 
 const Home = () => {
   return (
@@ -24,6 +25,8 @@ const Home = () => {
       >
         <Cities />
       </div>
+
+      <Marketplace />
 
     </div>
   )
